@@ -19,6 +19,9 @@ var generatedCode: [String] = [
 let stringsDictionary: [String: String] = {
     do {
         let stringsData = try Data(contentsOf: URL(fileURLWithPath: inputPath))
+		if stringsData.isEmpty {
+			return [:]
+		}
         let plistObject = try PropertyListSerialization.propertyList(from: stringsData, format: nil)
         guard let stringsDictionary = plistObject as? [String: String] else {
             print("Failed to parse strings file — is it valid?")
